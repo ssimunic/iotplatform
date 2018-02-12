@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 ">
-            <h1>{{ $device->name }} fields</h1>
+            <h1>{{ $field->device->name }}: {{ $field->key }} data</h1>
             <hr>
             @if(session('success'))
                 <div class="alert alert-success" role="alert"><b>Success:</b> {{ session('success') }}</div>
@@ -10,37 +10,26 @@
             @if(session('error'))
                 <div class="alert alert-danger" role="alert"><b>Error:</b> {{ session('error') }}</div>
             @endif
-            <form class="form-inline" method="POST" action="/devices/fields/{{ $device->id }}">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="key" name="key" required placeholder="Field key">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-            <hr>
-            @if(count($device->fields)==0)
-            No fields.
+            @if(count($data)==0)
+            No data.
             @else
             <table class="table table-striped table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th>#</th>
-                        <th>Key</th>
-                        <th>Actions</th>
+                        <th>Value</th>
+                        <th>Datetime</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
                     $i = 1
                     @endphp
-                    @foreach($device->fields as $field)
+                    @foreach($data as $d)
                         <tr>
                             <td>{{ $i }} </td>
-                            <td>{{ $field->key }} (<a href="/devices/fields/data/{{ $field->id }}">{{ $field->data->count() }}</a>)</td>
-                            <td>
-                                <a href="/devices/fields/delete/{{ $field->id }}" class="btn btn-danger">Delete</a>
-                                <a href="/devices/fields/reset/{{ $field->id }}" class="btn btn-warning">Reset</a>
-                            </td>
+                            <td>{{ $d->value }}</td>
+                            <td>{{ $d->datetime }}</td>
                         </tr>
                         @php
                         $i++
@@ -49,6 +38,11 @@
                 </tbody>
             </table>
             @endif
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    {{ $data->links() }}
+                </div>
+            </div>
         </div>
     </div>
 </div>

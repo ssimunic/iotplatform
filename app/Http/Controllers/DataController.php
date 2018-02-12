@@ -33,10 +33,17 @@ class DataController extends Controller
         }
         
         $device = Device::where('api_key', '=', $api_key)->first();
+        if(empty($device)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Non existing api key.'
+            ]);
+        }
 
         $fieldsFound = array();
         $fieldsNotFound = array();
-        
+        $triggers_activated = array();
+
         foreach($values as $key => $value) {
             $foundField = 0;
             foreach($device->fields as $field) {
@@ -48,6 +55,19 @@ class DataController extends Controller
                         'device_field_id' => $field->id
                     ]);
                     array_push($fieldsFound, $key); 
+
+                    foreach($field->triggers as $trigger) {
+                        if (($value > $trigger->max_value) || ($value < $trigger->min_value)) {
+                            array_push($triggers_activated, array(
+                                'min_value' => $trigger->min_value,
+                                'max_value' => $trigger->max_value,
+                                'email' => $trigger->email,
+                                'webhook_url' => $trigger->webhook_url
+                            ));
+
+                            // todo: send email, call webhook
+                        } 
+                    }
                 }
             }
             if (!$foundField) {
@@ -55,11 +75,15 @@ class DataController extends Controller
             }
         }
 
+        $device->last_check = $datetime;
+        $device->save();
+
         return response()->json([
             'status' => 'success',
             'read_every' => $device->read_every,
             'added' => $fieldsFound,
-            'not_added' => $fieldsNotFound
+            'not_added' => $fieldsNotFound,
+            'triggers_activated' => $triggers_activated
         ]);
     }
 }

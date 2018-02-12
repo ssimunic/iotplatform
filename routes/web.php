@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
 
-Route::get('/data', 'DataController@addData')->name('addData')->middleware('auth');
+Route::get('/data', 'DataController@addData')->name('addData');
 
 Route::get('/charts', 'ChartController@showAll')->name('charts')->middleware('auth');
 Route::post('/charts', 'ChartController@addChart')->name('addChart')->middleware('auth');
@@ -41,6 +41,7 @@ Route::get('/devices/fields/{id}', 'DeviceFieldController@showDeviceFields')->na
 Route::post('/devices/fields/{id}', 'DeviceFieldController@addDeviceFields')->name('addDeviceFields')->middleware('auth');
 Route::get('/devices/fields/delete/{id}', 'DeviceFieldController@deleteDeviceFields')->name('deleteDeviceFields')->middleware('auth');
 Route::get('/devices/fields/reset/{id}', 'DeviceFieldController@resetDeviceFields')->name('resetDeviceFields')->middleware('auth');
+Route::get('/devices/fields/data/{id}', 'DeviceFieldController@dataDeviceFields')->name('dataDeviceFields')->middleware('auth');
 
 Route::get('/devices/triggers/{id}', 'TriggerController@showDeviceTriggers')->name('showDeviceTriggers')->middleware('auth');
 Route::post('/devices/triggers/{id}', 'TriggerController@addDeviceTriggers')->name('addDeviceTriggers')->middleware('auth');

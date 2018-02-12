@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data;
 use App\Device;
 use App\DeviceField;
 use Illuminate\Http\Request;
@@ -76,5 +77,19 @@ class DeviceFieldController extends Controller
         }
 
         return redirect()->route('showDeviceFields', ['id' => $deviceId])->with('success', 'Field data reseted.');        
+    }
+
+    public function dataDeviceFields(Request $request, $id) {
+        $deviceField = DeviceField::find($id);
+        if ($deviceField->device->user_id != Auth::user()->id) {
+            return redirect()->route('devices');
+        }
+
+        $data = Data::where('device_field_id', '=', $id)->orderBy('datetime', 'desc')->paginate(20);
+
+        return view('datafield')->with([
+            'data' =>  $data,
+            'field' => $deviceField
+        ]);
     }
 }
