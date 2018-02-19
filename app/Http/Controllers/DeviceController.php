@@ -68,6 +68,13 @@ class DeviceController extends Controller
             foreach($field->triggers as $trigger) {
                 $trigger->delete();
             }
+            foreach($field->data as $d) {
+                $d->delete();
+            }
+            foreach($field->chartFields as $chartField) {
+                $chartField->delete();
+            }
+            
             $field->delete();
         }
 

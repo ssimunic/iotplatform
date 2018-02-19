@@ -15,6 +15,7 @@
             <div class="form-group">
                 <select class="form-control" id="public" name="type">
                     <option value="linechart">Line Chart</option>
+                    <option value="scatter">Scatter</option>
                 </select>
             </div>
             <div class="form-group">

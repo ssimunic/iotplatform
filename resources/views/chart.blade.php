@@ -74,7 +74,12 @@
 
                 window.onload = function () {
                     var ctx1 = document.getElementById("canvas").getContext("2d");
+                    @if($chart->type=="linechart") 
                     window.myLine = new Chart(ctx1, config);
+                    @endif
+                    @if($chart->type=="scatter") 
+                    window.myLine = new Chart.Scatter(ctx1, config);
+                    @endif
                 };
             </script>
         </div>

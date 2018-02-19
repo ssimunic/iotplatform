@@ -15,6 +15,7 @@
             <div class="form-group">
                 <select class="form-control" id="public" name="type">
                     <option value="linechart" @if($chart->type=="linechart") selected @endif>Line Chart</option>
+                    <option value="scatter" @if($chart->type=="scatter") selected @endif>Scatter</option>
                 </select>
             </div>
             <div class="form-group">
