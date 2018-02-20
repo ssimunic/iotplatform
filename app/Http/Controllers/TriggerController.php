@@ -64,13 +64,20 @@ class TriggerController extends Controller
     public function showEditDeviceTrigger(Request $request, $id)
     {
         $trigger = Trigger::find($id);
-        
+        if ($trigger->deviceField->device->user_id != Auth::user()->id) {
+            return redirect()->route('devices');
+        }
+
         return view('edittrigger')->with('trigger', $trigger);
     }    
     
     public function editDeviceTrigger(Request $request, $id)
     {
         $trigger = Trigger::find($id);
+        if ($trigger->deviceField->device->user_id != Auth::user()->id) {
+            return redirect()->route('devices');
+        }
+        
         $deviceId = $trigger->deviceField->device_id;
         
         $trigger->device_field_id = $request->input('device_field_id');

@@ -53,6 +53,7 @@ class DeviceController extends Controller
 
         $device->read_time = $request->input('read_time');
         $device->notes = $request->input('notes');
+        $device->location = $request->input('location');
         $device->save();
 
         return redirect()->route('devices')->with('success', 'Device settings saved.');        

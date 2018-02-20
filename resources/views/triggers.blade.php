@@ -45,6 +45,9 @@
                     <label for="webhook_url" class="col-lg-2 control-label">Webhook URL</label>
                     <div class="col-lg-10">
                         <input type="text" class="form-control" id="webhook_url" name="webhook_url" placeholder="Webhook URL">
+                        <br>
+                        <div class="alert alert-info" role="alert">Use <strong>{field}</strong> and <strong>{value}</strong> in URL to refer to field name and value that triggered request.</div>
+
                     </div>
                     </div>
                     <div class="form-group">

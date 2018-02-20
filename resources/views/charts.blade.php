@@ -41,7 +41,11 @@
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>{{ $chart->name }}</h3>
-                                <br>
+                                <p>
+                                @if($chart->type=="linechart") Line Chart, @endif
+                                @if($chart->type=="scatter") Scatter, @endif
+                                {{ count($chart->fields) }} dataset(s)
+                                </p>
                                 <p>
                                 <a href="/charts/{{ $chart->id }}" class="btn btn-primary">View</a>
                                 <a href="/charts/edit/{{ $chart->id }}" class="btn btn-default">Edit</a>
