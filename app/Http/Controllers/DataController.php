@@ -46,6 +46,12 @@ class DataController extends Controller
         $triggers_activated = array();
 
         foreach($values as $key => $value) {
+            if (!is_numeric($value)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Non-numeric value for field '.$key.'.'
+                ]);
+            }
             $foundField = 0;
             foreach($device->fields as $field) {
                 if($field->key == $key) {
