@@ -1,5 +1,5 @@
 # IoT Platform
-Generic Internet of Things platform for data collection. Devices can be registered with custom fields. Supports triggers, visualization through charts, floor maps and Google Maps.
+Generic Internet of Things platform for data collection. Devices can be registered with custom fields. Supports triggers and visualization through charts.
 
 ## Table of contents
   * [Technology stack](#technology-stack)
