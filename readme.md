@@ -1,8 +1,7 @@
 # IoT Platform
-Generic Internet of Things platform for data collection. Supports triggers, visualization through charts, floor maps and Google Maps.
+Generic Internet of Things platform for data collection. Devices can be registered with custom fields. Supports triggers, visualization through charts, floor maps and Google Maps.
 
 ## Table of contents
-  * [Goal](#goal)
   * [Technology stack](#technology-stack)
   * [Features](#features)
     * [Overview](#overview)
@@ -16,9 +15,10 @@ Generic Internet of Things platform for data collection. Supports triggers, visu
       * [Single Field Chart](#single-field-chart)
       * [Multi Field Chart](#multi-field-chart)
     * [Usage](#usage)
-      * [API Parameters](#api-parameters)
-      * [Request Response](#request-response)
+      * [Request](#request)
+      * [Response](#response)
       * [Error responses](#error-responses)
+  * [Installation](#installation)
 
 ## Goal
 
@@ -45,33 +45,49 @@ List of devices.
 
 #### Device Fields
 
+Device fields are used as keys for sending data to the platform.
+
 ![](https://i.imgur.com/kcmkEtj.png)
 
 #### Device Settings
+
+Basic device configuration and settings.
 
 ![](https://i.imgur.com/ngkBfat.png)
 
 #### Device Triggers
 
+Triggers via email and webhook.
+
 ![](https://i.imgur.com/dUu61Xu.png)
 
 #### Device Data
+
+Browse device data.
 
 ![](https://i.imgur.com/W7b9UoX.png)
 
 ### Charts
 
+Create charts.
+
 ![](https://i.imgur.com/r5H3Jc6.png)
 
 #### Edit Chart
+
+Edit chart and add fields to display on it.
 
 ![](https://i.imgur.com/6TU440A.png)
 
 #### Single Field Chart
 
+Example of single field chart.
+
 ![](https://i.imgur.com/H2v6tgu.png)
 
 #### Multi Field Chart 
+
+Examples of multi field charts.
 
 ![](https://i.imgur.com/mYVk2Vy.png)
 
@@ -79,7 +95,7 @@ List of devices.
 
 ### Usage
 
-#### API Parameters
+#### Request
 
 Example request
 
@@ -92,9 +108,10 @@ localhost:8000/data?api_key=SYKzfAmDjFjbGonBbIHWrucslNFN8nD1mnABYXfhDztjY
 
 It is also possible to use additional parameters: `datetime` and `mac_address`.
 
-#### Request Response
+#### Response
 
 Example response
+
 ```js
 {
   status: "success",
@@ -124,3 +141,11 @@ Example response
 * No values.
 * Non existing api key.
 * Non-numeric value for field name.
+
+## Installation
+
+* Install Apache, PHP7, MySQL and Composer
+* Run `composer install` in root directory
+* Create database using `iotplatform.sql`
+* Configure `.env` file
+* Run `php artisan serve ` in root directory
