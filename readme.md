@@ -20,10 +20,6 @@ Generic Internet of Things platform for data collection. Devices can be register
       * [Error responses](#error-responses)
   * [Installation](#installation)
 
-## Goal
-
-
-
 ## Technology stack
 * [Laravel](https://laravel.com/) for website and RESTful API
 * [MySQL](https://www.mysql.com/) database
